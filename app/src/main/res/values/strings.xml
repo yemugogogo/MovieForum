@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Blogv6</string>
+    <string name="title_home">首頁</string>
+    <string name="title_news">新聞</string>
+    <string name="title_blog">社區</string>
+    <string name="title_mine">我的</string>
+</resources>
