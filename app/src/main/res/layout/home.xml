@@ -3,11 +3,12 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView3"
         android:layout_width="186dp"
         android:layout_height="160dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        android:text="TextView" />
+        android:text="搜尋＋首頁"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 </RelativeLayout>

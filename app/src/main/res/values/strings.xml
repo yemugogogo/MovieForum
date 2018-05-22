@@ -4,4 +4,9 @@
     <string name="title_news">新聞</string>
     <string name="title_blog">社區</string>
     <string name="title_mine">我的</string>
+
+    <string name="text_a">關注</string>
+    <string name="text_b">發現</string>
+    <string name="text_c">收藏</string>
+    <string name="text_d">專欄</string>
 </resources>
