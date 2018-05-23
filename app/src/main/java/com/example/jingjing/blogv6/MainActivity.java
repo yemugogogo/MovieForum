@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity
         BottomNavigationView navigation =  findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
+        navigation.setSelectedItemId(R.id.navigation_home);
+
     }
 
 

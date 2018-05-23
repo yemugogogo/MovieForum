@@ -23,6 +23,7 @@ public class Blogfragment extends Fragment {
     private ViewPager mViewPager;
 
     private RelativeLayout mTabd;
+    private RelativeLayout mTabc;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.e("jjjj", "onCreate called.");
@@ -35,6 +36,7 @@ public class Blogfragment extends Fragment {
         // Here is where we can get the context.
         Log.e("jjjj", "onAttach called.");
         mTabd = new tabd(context);
+        mTabc = new tabc(context);
     }
 
     @Override
@@ -86,8 +88,8 @@ public class Blogfragment extends Fragment {
                     break;
                 case 2:
                     //Log.e("jjjj", "2");
-                    view = getLayoutInflater().inflate(R.layout.tabc, container, false);
-                    container.addView((View)view);
+                    view = mTabc;
+                    container.addView(mTabc);
                     break;
                 case 3:
                     Log.e("jjjj", "3");
