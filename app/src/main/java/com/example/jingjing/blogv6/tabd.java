@@ -34,7 +34,7 @@ public class tabd extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 openest();
-                Log.e("jjj", "onClick registered for tabd class");
+                Log.e("ooo", "onClick registered for tabd class");
             }
         });
     }
