@@ -47,7 +47,7 @@ public class test extends AppCompatActivity {
     }
 
     private void addBlog(){
-        String name="Ginger";
+        String name="Peter";
         String title=editText_title.getText().toString().trim();
         String article=editText_article.getText().toString().trim();
         String like="0";
@@ -61,11 +61,10 @@ public class test extends AppCompatActivity {
             entryToPush.put("title", title);
             entryToPush.put("article", article);
             entryToPush.put("like", like);
-            entryToPush.put("atten",atten);
-            entryToPush.put("fans",fans);
+
 // Add a new document with a generated ID
 
-            db.collection("Blog_test9")
+            db.collection("Article_CFS")
                     .add(entryToPush)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override

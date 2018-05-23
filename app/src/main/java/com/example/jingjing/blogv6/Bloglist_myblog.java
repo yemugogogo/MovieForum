@@ -1,7 +1,6 @@
 package com.example.jingjing.blogv6;
 
 import android.app.Activity;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,17 +13,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
-public class Bloglist_myblog extends ArrayAdapter<myblog> {
+public class Bloglist_myblog extends ArrayAdapter<Article> {
 
     FirebaseFirestore db= FirebaseFirestore.getInstance();
 
     private Activity context;
-    private List<myblog> myblogs;
+    private List<Article> Articles;
 
-    public Bloglist_myblog(Activity context,List<myblog> myblogs){
-        super(context,R.layout.listview_myblog,myblogs);
+    public Bloglist_myblog(Activity context,List<Article> Articles){
+        super(context,R.layout.listview_myblog, Articles);
         this.context=context;
-        this.myblogs=myblogs;
+        this.Articles = Articles;
     }
 
     @NonNull
@@ -38,11 +37,11 @@ public class Bloglist_myblog extends ArrayAdapter<myblog> {
         TextView myblog_3=(TextView)listviewItem.findViewById(R.id.myblog_3);
         TextView myblog_4=(TextView)listviewItem.findViewById(R.id.myblog_4);
 
-        myblog myblog=myblogs.get(position);
-        myblog_1.setText(myblog.getName());
-        myblog_2.setText(myblog.getTitle());
-        myblog_3.setText(myblog.getArticle());
-        myblog_4.setText(myblog.getLike());
+        Article Article = Articles.get(position);
+        myblog_1.setText(Article.getName());
+        myblog_2.setText(Article.getTitle());
+        myblog_3.setText(Article.getArticle());
+        myblog_4.setText(Article.getLike());
 
         return listviewItem;
     }

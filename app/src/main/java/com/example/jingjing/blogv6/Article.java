@@ -1,16 +1,16 @@
 package com.example.jingjing.blogv6;
 
-public class myblog {
+public class Article {
 
     String name;
     String title;
     String article;
     String like;
 
-    public myblog(){
+    public Article(){
 
         }
-    public myblog(String name,String title,String article,String like){
+    public Article(String name, String title, String article, String like){
         this.name=name;
         this.title=title;
         this.article=article;

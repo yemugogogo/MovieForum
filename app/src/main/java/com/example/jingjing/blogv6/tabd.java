@@ -3,7 +3,6 @@ package com.example.jingjing.blogv6;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class tabd extends RelativeLayout {
@@ -33,11 +33,13 @@ public class tabd extends RelativeLayout {
     private Context myContext;
     private View view01;
 
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    GetCFS cfs;
     Button button2;
     ListView mybloglist;
-    List<myblog> myblog;
+
+    ArrayList<Article> articleDB;
+    ArrayList<Article> articlePeter;
+    ArrayList<Article> articleGinger;
 
     public tabd(Context context) {
         super(context);
@@ -47,42 +49,42 @@ public class tabd extends RelativeLayout {
 
         button = (Button)findViewById(R.id.button);
         //button2= (Button)findViewById(R.id.button2);
-        myblog=new ArrayList<>();
+
+        cfs = new GetCFS();
+        Thread t = new Thread(cfs);
+        t.start();
+        try {
+            t.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        articleDB = cfs.articleDB;
+        Log.e("itspeter", "Thread End. What's the size ?" + cfs.articleDB.size());
+
+        articlePeter = new ArrayList<>();
+        articleGinger = new ArrayList<>();
         mybloglist=(ListView)findViewById(R.id.mybloglist);
 
+        //getArticleCFS();
 
+        for (int i=0; i<articleDB.size(); ++i) {
+            Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
+            if (articleDB.get(i).getName().equals("Ginger"))
+                articleGinger.add(articleDB.get(i));
+        }
 
-                db.collection("Blog_test1")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (DocumentSnapshot document : task.getResult()) {
-                                        Log.d("itspeter", document.getId() + " => " + document.getData());
-                                        JSONObject tmpJsonobj = new JSONObject(document.getData());
-                                        // Convert to Movie class
-                                        try {
-                                            myblog blogs = new myblog(
-                                                    "名字"+tmpJsonobj.getString("name"),
-                                                    "標題"+tmpJsonobj.getString("title"),
-                                                    "文章"+tmpJsonobj.getString("article"),
-                                                    "熱度"+tmpJsonobj.getString("like"));
-                                            myblog.add(blogs);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                        ArrayAdapter adapter = new Bloglist_myblog((Activity) myContext, myblog);
-                                        mybloglist.setAdapter(adapter);
-                                    }
-                                } else {
-                                    Log.w("itspeter", "Error getting documents.", task.getException());
-                                }
-                            }
-                        });
+        for (int i=0; i<articleDB.size(); ++i) {
+            Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
+            if (articleDB.get(i).getName().equals("Peter")) {
+                articlePeter.add(articleDB.get(i));
+            }
+        }
 
+        //ArrayAdapter adapter = new Bloglist_myblog((Activity) myContext, articleDB);
+        ArrayAdapter adapter = new Bloglist_myblog((Activity) myContext, articlePeter);
+        //ArrayAdapter adapter = new Bloglist_myblog((Activity) myContext, articleDB);
 
-
+        mybloglist.setAdapter(adapter);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +104,45 @@ public class tabd extends RelativeLayout {
         myContext.startActivity(intent);
         //button.setText("I'm clicked!");
     }
+
+    public void getArticleCFS() {
+    }
+}
+
+class GetCFS implements Runnable {
+    public ArrayList<Article> articleDB;
+
+    @Override
+    public void run() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Article_CFS")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                Log.d("itspeter", document.getId() + " => " + document.getData());
+                                JSONObject tmpJsonobj = new JSONObject(document.getData());
+                                // Convert to Movie class
+                                try {
+                                    Article article = new Article(
+                                            tmpJsonobj.getString("name"),
+                                            "標題"+tmpJsonobj.getString("title"),
+                                            "文章"+tmpJsonobj.getString("article"),
+                                            "熱度"+tmpJsonobj.getString("like"));
+                                    articleDB.add(article);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } else {
+                            Log.w("itspeter", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+    }
 }
 
 class tabd1 extends AppCompatActivity {
@@ -109,7 +150,7 @@ class tabd1 extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Button button2;
     ListView mybloglist;
-    List<myblog> myblog;
+    List<Article> Article;
     Context myContext;
 
 
