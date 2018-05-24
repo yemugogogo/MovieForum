@@ -1,6 +1,7 @@
 package com.example.jingjing.blogv6;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,12 +23,19 @@ public class Blogfragment extends Fragment {
     private android.support.design.widget.TabLayout mTabs;
     private ViewPager mViewPager;
 
+    //private tabd mTabd;
     private RelativeLayout mTabd;
     private RelativeLayout mTabc;
+
+//    public Context mainContext;
+//    public void setMainContext(Context mainContext) {
+//        this.mainContext = mainContext;
+//    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.e("jjjj", "onCreate called.");
         return inflater.inflate(R.layout.blog,null);
+
     }
 
     @Override
@@ -93,6 +101,7 @@ public class Blogfragment extends Fragment {
                     break;
                 case 3:
                     Log.e("jjjj", "3");
+                    //mTabd.setMainContext(mainContext);
                     view = mTabd;
                     container.addView(mTabd);
                     break;

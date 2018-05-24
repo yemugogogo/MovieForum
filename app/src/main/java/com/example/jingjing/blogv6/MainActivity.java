@@ -1,5 +1,6 @@
 package com.example.jingjing.blogv6;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,18 +14,12 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener{
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         BottomNavigationView navigation =  findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
-
         navigation.setSelectedItemId(R.id.navigation_home);
 
     }
@@ -45,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment=null;
+        //Blogfragment blogfragment;
 
         switch (item.getItemId()){
             case R.id.navigation_home:
@@ -54,6 +50,9 @@ public class MainActivity extends AppCompatActivity
                 fragment=new Newsfragment();
                 break;
             case R.id.navigation_blog:
+                //blogfragment = new Blogfragment();
+                //blogfragment.setMainContext(getApplicationContext());
+                //fragment = (Fragment) blogfragment;
                 fragment=new Blogfragment();
                 break;
             case R.id.navigation_mine:

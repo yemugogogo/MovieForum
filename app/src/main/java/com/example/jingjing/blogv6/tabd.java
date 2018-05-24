@@ -14,11 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONException;
@@ -27,19 +30,29 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class tabd extends RelativeLayout {
     private Button button;
     private Context myContext;
+    private Context mainContext;
     private View view01;
 
-    GetCFS cfs;
     Button button2;
     ListView mybloglist;
 
     ArrayList<Article> articleDB;
     ArrayList<Article> articlePeter;
     ArrayList<Article> articleGinger;
+
+    private final Lock lock = new ReentrantLock();
+    private final Condition dbReady = lock.newCondition();
+
+    public void setMainContext(Context mainContext) {
+        this.mainContext = mainContext;
+    }
 
     public tabd(Context context) {
         super(context);
@@ -49,23 +62,26 @@ public class tabd extends RelativeLayout {
 
         button = (Button)findViewById(R.id.button);
         //button2= (Button)findViewById(R.id.button2);
+        mybloglist=(ListView)findViewById(R.id.mybloglist);
 
-        cfs = new GetCFS();
-        Thread t = new Thread(cfs);
-        t.start();
-        try {
-            t.join(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        articleDB = cfs.articleDB;
-        Log.e("itspeter", "Thread End. What's the size ?" + cfs.articleDB.size());
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openest();
+                Log.e("ooo", "onClick registered for tabd class");
+            }
+        });
+
+        getArticleCFS();
+        // FINISH ALL THE THINGS, AND WAIT FOR THE DATABASEREADY
+    }
+
+    public void databaseReady() {
+        Log.e("itspeter", "Thread End. What's the size ?" + articleDB.size());
+        Toast.makeText(myContext, "Database reading done !", Toast.LENGTH_SHORT).show();
 
         articlePeter = new ArrayList<>();
         articleGinger = new ArrayList<>();
-        mybloglist=(ListView)findViewById(R.id.mybloglist);
-
-        //getArticleCFS();
 
         for (int i=0; i<articleDB.size(); ++i) {
             Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
@@ -80,19 +96,14 @@ public class tabd extends RelativeLayout {
             }
         }
 
-        //ArrayAdapter adapter = new Bloglist_myblog((Activity) myContext, articleDB);
-        ArrayAdapter adapter = new Bloglist_myblog((Activity) myContext, articlePeter);
-        //ArrayAdapter adapter = new Bloglist_myblog((Activity) myContext, articleDB);
 
-        mybloglist.setAdapter(adapter);
+        ArrayAdapter adapterDB = new Bloglist_myblog((Activity) myContext, articleDB);
+        ArrayAdapter adapterGinger = new Bloglist_myblog((Activity) myContext, articleGinger);
+        ArrayAdapter adapterPeter = new Bloglist_myblog((Activity) myContext, articlePeter);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openest();
-                Log.e("ooo", "onClick registered for tabd class");
-            }
-        });
+        //mybloglist.setAdapter(adapterDB);
+        mybloglist.setAdapter(adapterGinger);
+        //mybloglist.setAdapter(adapterPeter);
     }
 
     public void openest() {
@@ -105,16 +116,14 @@ public class tabd extends RelativeLayout {
         //button.setText("I'm clicked!");
     }
 
+
     public void getArticleCFS() {
-    }
-}
+        // Filter example also at: https://firebase.google.com/docs/firestore/query-data/queries
+        // https://medium.com/google-developers/why-are-firebase-apis-asynchronous-callbacks-promises-tasks-e037a6654a93
+        Toast.makeText(myContext, "Reading database......", Toast.LENGTH_SHORT).show();
 
-class GetCFS implements Runnable {
-    public ArrayList<Article> articleDB;
-
-    @Override
-    public void run() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        articleDB = new ArrayList<>();
         db.collection("Article_CFS")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -135,15 +144,16 @@ class GetCFS implements Runnable {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                                databaseReady();
                             }
                         } else {
                             Log.w("itspeter", "Error getting documents.", task.getException());
                         }
                     }
                 });
-
     }
 }
+
 
 class tabd1 extends AppCompatActivity {
 
