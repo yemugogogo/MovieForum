@@ -23,6 +23,7 @@ public class Blogfragment extends Fragment {
     private android.support.design.widget.TabLayout mTabs;
     private ViewPager mViewPager;
 
+
     //private tabd mTabd;
     private RelativeLayout mTabd;
     private RelativeLayout mTabc;
@@ -95,7 +96,7 @@ public class Blogfragment extends Fragment {
                     container.addView((View)view);
                     break;
                 case 2:
-                    //Log.e("jjjj", "2");
+                    Log.e("jjjj", "2");
                     view = mTabc;
                     container.addView(mTabc);
                     break;

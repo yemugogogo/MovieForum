@@ -44,31 +44,61 @@
                             android:layout_height="150dp"
                             android:src="@drawable/a">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/b">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/c">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/d">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/e">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/f">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <Button
                             android:layout_width="50dp"
                             android:layout_height="150dp"
@@ -97,31 +127,61 @@
                             android:layout_height="150dp"
                             android:src="@drawable/q">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/r">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/t">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/w">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/y">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/f">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <Button
                             android:layout_width="50dp"
                             android:layout_height="150dp"
@@ -150,36 +210,67 @@
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/a"></ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/b"></ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/c"></ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/d"></ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/e"></ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/f"></ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
                         <Button
                             android:layout_width="50dp"
                             android:layout_height="150dp"
                             android:text="查看更多" />
+
 
                     </LinearLayout>
                 </HorizontalScrollView>
@@ -203,31 +294,61 @@
                             android:layout_height="150dp"
                             android:src="@drawable/a">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/b">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/c">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/d">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/e">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="150dp"
                             android:src="@drawable/f">
                         </ImageView>
+                        <TextView
+                            android:text="   "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
                         <Button
                             android:layout_width="50dp"
                             android:layout_height="150dp"

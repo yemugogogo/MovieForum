@@ -30,7 +30,7 @@ public class test extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);button_enter = (Button) findViewById(R.id.button_enter);
+        setContentView(R.layout.sendoutpage);button_enter = (Button) findViewById(R.id.button_enter);
         myContext=this;
         editText_title=(EditText)  findViewById(R.id.editText_title);
         editText_article=(EditText)  findViewById(R.id.editText_article);

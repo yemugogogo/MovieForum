@@ -55,19 +55,21 @@ public class Newsfragment extends Fragment{
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+
+            //subpage(news1,2,3)無法直接進行actuvity，修改可參照Blogfragment
             View view = null;
             switch (position){
                 case 0:
                     //Log.e("jjjj", "0");
-                    view = getLayoutInflater().inflate(R.layout.taba, container, false);
+                    view = getLayoutInflater().inflate(R.layout.news1, container, false);
                     break;
                 case 1:
                     //Log.e("jjjj", "1");
-                    view = getLayoutInflater().inflate(R.layout.tabb, container, false);
+                    view = getLayoutInflater().inflate(R.layout.news2, container, false);
                     break;
                 case 2:
                     //Log.e("jjjj", "2");
-                    view = getLayoutInflater().inflate(R.layout.tabc, container, false);
+                    view = getLayoutInflater().inflate(R.layout.news3, container, false);
                     break;
 
 

@@ -30,9 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
 
 public class tabd extends RelativeLayout {
     private Button button;
@@ -47,8 +45,7 @@ public class tabd extends RelativeLayout {
     ArrayList<Article> articlePeter;
     ArrayList<Article> articleGinger;
 
-    private final Lock lock = new ReentrantLock();
-    private final Condition dbReady = lock.newCondition();
+
 
     public void setMainContext(Context mainContext) {
         this.mainContext = mainContext;
@@ -101,8 +98,8 @@ public class tabd extends RelativeLayout {
         ArrayAdapter adapterGinger = new Bloglist_myblog((Activity) myContext, articleGinger);
         ArrayAdapter adapterPeter = new Bloglist_myblog((Activity) myContext, articlePeter);
 
-        //mybloglist.setAdapter(adapterDB);
-        mybloglist.setAdapter(adapterGinger);
+        mybloglist.setAdapter(adapterDB);
+        //mybloglist.setAdapter(adapterGinger);
         //mybloglist.setAdapter(adapterPeter);
     }
 
