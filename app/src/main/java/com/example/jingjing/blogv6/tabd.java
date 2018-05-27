@@ -42,7 +42,7 @@ public class tabd extends RelativeLayout {
     ListView mybloglist;
 
     ArrayList<Article> articleDB;
-    ArrayList<Article> articlePeter;
+    ArrayList<Article> articleuser;
     ArrayList<Article> articleGinger;
 
 
@@ -77,30 +77,26 @@ public class tabd extends RelativeLayout {
         Log.e("itspeter", "Thread End. What's the size ?" + articleDB.size());
         Toast.makeText(myContext, "Database reading done !", Toast.LENGTH_SHORT).show();
 
-        articlePeter = new ArrayList<>();
-        articleGinger = new ArrayList<>();
+        articleuser = new ArrayList<>();
+
+
+
 
         for (int i=0; i<articleDB.size(); ++i) {
             Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
-            if (articleDB.get(i).getName().equals("Ginger"))
-                articleGinger.add(articleDB.get(i));
-        }
-
-        for (int i=0; i<articleDB.size(); ++i) {
-            Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
-            if (articleDB.get(i).getName().equals("Peter")) {
-                articlePeter.add(articleDB.get(i));
+            if (articleDB.get(i).getName().equals(LoginActivity.user)) {
+                articleuser.add(articleDB.get(i));
             }
         }
 
 
-        ArrayAdapter adapterDB = new Bloglist_myblog((Activity) myContext, articleDB);
-        ArrayAdapter adapterGinger = new Bloglist_myblog((Activity) myContext, articleGinger);
-        ArrayAdapter adapterPeter = new Bloglist_myblog((Activity) myContext, articlePeter);
+        //ArrayAdapter adapterDB = new Bloglist_myblog((Activity) myContext, articleDB);
+        //ArrayAdapter adapterGinger = new Bloglist_myblog((Activity) myContext, articleGinger);
+        ArrayAdapter adapteruser = new Bloglist_myblog((Activity) myContext, articleuser);
 
-        mybloglist.setAdapter(adapterDB);
+        //mybloglist.setAdapter(adapterDB);
         //mybloglist.setAdapter(adapterGinger);
-        //mybloglist.setAdapter(adapterPeter);
+        mybloglist.setAdapter(adapteruser);
     }
 
     public void openest() {
@@ -134,15 +130,15 @@ public class tabd extends RelativeLayout {
                                 try {
                                     Article article = new Article(
                                             tmpJsonobj.getString("name"),
-                                            "標題"+tmpJsonobj.getString("title"),
-                                            "文章"+tmpJsonobj.getString("article"),
-                                            "熱度"+tmpJsonobj.getString("like"));
+                                            tmpJsonobj.getString("title"),
+                                            tmpJsonobj.getString("article"),
+                                            "\n熱度  ("+tmpJsonobj.getString("like")+")");
                                     articleDB.add(article);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                databaseReady();
                             }
+                            databaseReady();
                         } else {
                             Log.w("itspeter", "Error getting documents.", task.getException());
                         }

@@ -103,15 +103,10 @@ class tabc extends RelativeLayout {
                 return true;
             }
         });
-
-
-
-
-
     }
 
     public void databaseReady() {
-        Log.e("itspeter", "Thread End. What's the size ?" + articleDB.size());
+        Log.e("itspeter", "databaseReady: What's the size ?" + articleDB.size());
         Toast.makeText(myContext, "Database reading done !", Toast.LENGTH_SHORT).show();
 
         articlePeter = new ArrayList<>();
@@ -121,16 +116,16 @@ class tabc extends RelativeLayout {
 
         for (int i=0; i<articleDB.size(); ++i) {
             Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
-            if (articleDB.get(i).getName().equals("Ginger"))
+            if (articleDB.get(i).getName().equals(LoginActivity.user))
                 articleGinger.add(articleDB.get(i));
         }
 
-        for (int i=0; i<articleDB.size(); ++i) {
-            Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
-            if (articleDB.get(i).getName().equals("Peter")) {
-                articlePeter.add(articleDB.get(i));
-            }
-        }
+//        for (int i=0; i<articleDB.size(); ++i) {
+//            Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
+//            if (articleDB.get(i).getName().equals("Peter")) {
+//                articlePeter.add(articleDB.get(i));
+//            }
+//        }
 
         for (int i=0; i<articleDB.size(); ++i) {
             Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
@@ -154,17 +149,17 @@ class tabc extends RelativeLayout {
     public void databaseReady1() {
         Log.e("ooo", "Thread End. What's the size ?" + attentionDB.size());
         Toast.makeText(myContext, "Database reading done !", Toast.LENGTH_SHORT).show();
-
+        attenName = new ArrayList<>();
         for(int i=0;i<attentionDB.size();++i){
             Log.e("ooo", "|" + attentionDB.get(i).getOwner() + "|" + attentionDB.get(i).getBlgger_name() + "|");
-            if (attentionDB.get(i).getOwner().equals("Ginger")){//if user name="Ginger"
+            if (attentionDB.get(i).getOwner().equals(LoginActivity.user)){//if user name="Ginger"
                 attenName.add(attentionDB.get(i));
             }
         }
 
-        for(int i=0;i<attenName.size();++i){
-            Log.e("ooo", " Found - |" + attenName.get(i).getOwner() + "|" + attenName.get(i).getBlgger_name() + "|");
-        }
+//        for(int i=0;i<attenName.size();++i){
+//            Log.e("ooo", " Found - |" + attenName.get(i).getOwner() + "|" + attenName.get(i).getBlgger_name() + "|");
+//        }
         //ArrayAdapter adapterPeter = new Bloglist_myblog((Activity) myContext, articlePeter);
 
         ArrayAdapter adapterName = new Attenlist((Activity) myContext,attenName);
@@ -175,7 +170,7 @@ class tabc extends RelativeLayout {
     }
 
     public void databaseReady2() {
-        Log.e("itspeter", "Thread End. What's the size ?" + articleDB.size());
+        Log.e("itspeter", "databaseReady2. What's the size ?" + articleDB.size());
         Toast.makeText(myContext, "Database reading done !", Toast.LENGTH_SHORT).show();
 
         articlePeter = new ArrayList<>();
@@ -231,8 +226,8 @@ class tabc extends RelativeLayout {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                databaseReady();
                             }
+                            databaseReady();
                         } else {
                             Log.w("itspeter", "Error getting documents.", task.getException());
                         }
@@ -247,7 +242,6 @@ class tabc extends RelativeLayout {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         attentionDB = new ArrayList<>();
-        attenName = new ArrayList<>();
         db.collection("Attention")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -307,15 +301,15 @@ class tabc extends RelativeLayout {
                                 try {
                                     Article article = new Article(
                                             tmpJsonobj.getString("name"),
-                                            "標題"+tmpJsonobj.getString("title"),
-                                            "文章"+tmpJsonobj.getString("article"),
+                                            tmpJsonobj.getString("title"),
+                                            tmpJsonobj.getString("article"),
                                             "熱度"+tmpJsonobj.getString("like"));
                                     articleDB.add(article);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                databaseReady2();
                             }
+                            databaseReady2();
                         } else {
                             Log.w("itspeter", "Error getting documents.", task.getException());
                         }

@@ -9,7 +9,9 @@
     <item
         android:id="@+id/navigation_news"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_news" />
+        android:title="@string/title_news"
+
+        />
 
     <item
         android:id="@+id/navigation_blog"

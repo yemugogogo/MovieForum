@@ -25,6 +25,8 @@ public class Blogfragment extends Fragment {
 
 
     //private tabd mTabd;
+    private RelativeLayout mTaba;
+    private RelativeLayout mTabb;
     private RelativeLayout mTabd;
     private RelativeLayout mTabc;
 
@@ -46,6 +48,8 @@ public class Blogfragment extends Fragment {
         Log.e("jjjj", "onAttach called.");
         mTabd = new tabd(context);
         mTabc = new tabc(context);
+        mTabb = new tabb(context);
+        mTaba = new taba(context);
     }
 
     @Override
@@ -86,14 +90,14 @@ public class Blogfragment extends Fragment {
             Object view = null;
             switch (position) {
                 case 0:
-                    //Log.e("jjjj", "0");
-                    view = getLayoutInflater().inflate(R.layout.taba, container, false);
-                    container.addView((View)view);
+                    Log.e("jjjj", "0");
+                    view = mTaba;
+                    container.addView(mTaba);
                     break;
                 case 1:
                     //Log.e("jjjj", "1");
-                    view = getLayoutInflater().inflate(R.layout.tabb, container, false);
-                    container.addView((View)view);
+                    view = mTabb;
+                    container.addView(mTabb);
                     break;
                 case 2:
                     Log.e("jjjj", "2");
@@ -114,6 +118,6 @@ public class Blogfragment extends Fragment {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
-    }
 
+    }
 }

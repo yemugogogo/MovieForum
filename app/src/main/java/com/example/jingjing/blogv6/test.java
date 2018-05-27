@@ -39,6 +39,7 @@ public class test extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addBlog();
+                Toast.makeText(myContext, "Data Added!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -47,7 +48,7 @@ public class test extends AppCompatActivity {
     }
 
     private void addBlog(){
-        String name="Peter";
+        String name=LoginActivity.user;
         String title=editText_title.getText().toString().trim();
         String article=editText_article.getText().toString().trim();
         String like="0";
