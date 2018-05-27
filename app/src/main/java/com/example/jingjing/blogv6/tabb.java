@@ -70,6 +70,7 @@ public class tabb extends RelativeLayout{
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         articleDB = new ArrayList<>();
+        articletest = new ArrayList<>();
 
         db.collection("Article_CFS")
                 .get()
@@ -78,18 +79,20 @@ public class tabb extends RelativeLayout{
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot document : task.getResult()) {
-                                Log.d("itspeter", document.getId() + " => " + document.getData());
+                                Log.d("tabb", document.getId() + " => " + document.getData());
                                 JSONObject tmpJsonobj = new JSONObject(document.getData());
                                 // Convert to Movie class
                                 try {
-                                    Log.e("ppp","omgomg");
+                                    Log.e("tabb","Chinese desuka? " + tmpJsonobj.getString("name") + "|");
                                     Article article = new Article(
                                             tmpJsonobj.getString("name"),
                                             tmpJsonobj.getString("title"),
                                             tmpJsonobj.getString("article"),
                                             "\n熱度  ("+tmpJsonobj.getString("like")+")");
                                     articleDB.add(article);
+                                    articletest.add(article);
                                 } catch (JSONException e) {
+                                    Log.e("tabb","Why missed one data");
                                     e.printStackTrace();
                                 }
                                 if (articleDB==null){
@@ -180,7 +183,7 @@ public class tabb extends RelativeLayout{
         Log.e("itspeter", "databaseReady： What's the attentionDB size ?" + attentionDB.size());
 
         Toast.makeText(myContext, "Database reading done !", Toast.LENGTH_SHORT).show();
-        articletest = new ArrayList<>();
+
         attenName = new ArrayList<>();
 
 //        for (int i=0; i<articleDB.size(); ++i) {
@@ -198,12 +201,10 @@ public class tabb extends RelativeLayout{
         }
         for(int i=0;i<attenName.size();++i){
             for (int j=0;j<articleDB.size();++j){
-                Log.e("kkk","what is blogger name?"+attenName.get(i).getBlgger_name());
                 if (articleDB.get(j).getName().equals(attenName.get(i).getBlgger_name()) || articleDB.get(j).getName().equals(LoginActivity.user)){//if user name="Ginger"
-                    Log.e("kkk","what is if get?"+articleDB.get(j).getName());
-                }else{
-                    Log.e("kkk","what is else get?"+articleDB.get(j).getName());
-                    articletest.add(articleDB.get(j));
+                    articletest.remove(articleDB.get(j));
+                }else {
+                    //articletest.add(articleDB.get(j));
                 }
             }
         }

@@ -34,6 +34,7 @@
         </activity>
         <activity android:name=".tabd" />
         <activity android:name=".test" />
+        <activity android:name=".signup_page"></activity>
 
 
     </application>

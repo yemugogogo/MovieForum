@@ -202,7 +202,7 @@ public class taba extends RelativeLayout{
 
         for(int i=0;i<attentionDB.size();++i){
             Log.e("CCC", "|" + attentionDB.get(i).getOwner() + "|" + attentionDB.get(i).getBlgger_name() + "|");
-            if (attentionDB.get(i).getOwner().equals("Ginger")){//if user name="Ginger"
+            if (attentionDB.get(i).getOwner().equals(LoginActivity.user)){//if user name="Ginger"
                 attenName.add(attentionDB.get(i));
             }
         }

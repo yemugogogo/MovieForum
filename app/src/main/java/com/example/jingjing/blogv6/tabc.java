@@ -46,7 +46,9 @@ class tabc extends RelativeLayout {
     ArrayList<Article> articletest;
     ArrayList<Attention> attenName;
     ArrayList<Attention> attentionDB;
-
+    ArrayList<Article>  articlebutton2;
+    ArrayList<Article> bloggerName;
+    ArrayList<String> Name;
 
     private final Lock lock = new ReentrantLock();
     private final Condition dbReady = lock.newCondition();
@@ -82,7 +84,7 @@ class tabc extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 //openest();
-                getArticleCFS2();
+                getArticleName();
                 Log.e("ooo", "onClick registered for tabd class");
 
 
@@ -170,34 +172,51 @@ class tabc extends RelativeLayout {
     }
 
     public void databaseReady2() {
-        Log.e("itspeter", "databaseReady2. What's the size ?" + articleDB.size());
+        //Log.e("itspeter", "databaseReady： What's the articleDB size ?" + articleDB.size());
+        //Log.e("itspeter", "databaseReady： What's the attentionDB size ?" + attentionDB.size());
+
         Toast.makeText(myContext, "Database reading done !", Toast.LENGTH_SHORT).show();
 
-        articlePeter = new ArrayList<>();
-        articleGinger = new ArrayList<>();
+        attenName = new ArrayList<>();
 
-        for (int i=0; i<articleDB.size(); ++i) {
-            Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
-            if (articleDB.get(i).getName().equals("Ginger"))
-                articleGinger.add(articleDB.get(i));
+//        for (int i=0; i<articleDB.size(); ++i) {
+//            Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
+//            if (articleDB.get(i).getName().equals("Ginger")) {
+//                articletest.add(articleDB.get(i));
+//            }
+//        }
+
+        for(int i=0;i<attentionDB.size();++i){
+            Log.e("CCC", "|" + attentionDB.get(i).getOwner() + "|" + attentionDB.get(i).getBlgger_name() + "|");
+            if (attentionDB.get(i).getOwner().equals(LoginActivity.user)){//if user name="Ginger"
+                attenName.add(attentionDB.get(i));
+            }
         }
-
-        for (int i=0; i<articleDB.size(); ++i) {
-            Log.e("ooo", "|" + articleDB.get(i).getName() + "|");
-            if (articleDB.get(i).getName().equals("Peter")) {
-                articlePeter.add(articleDB.get(i));
+        for(int i=0;i<attenName.size();++i){
+            for (int j=0;j<articleDB.size();++j){
+                if (articleDB.get(j).getName().equals(attenName.get(i).getBlgger_name()) || articleDB.get(j).getName().equals(LoginActivity.user)){//if user name="Ginger"
+                    articletest.remove(articleDB.get(j));
+                }else {
+                    //articletest.add(articleDB.get(j));
+                }
             }
         }
 
+//        Name=new ArrayList<>();
+//        for(int i=0;i<articletest.size();i++){
+//            Name.add(articletest.get(i).getName().toString());
+//        }
+        //ArrayAdapter adaptername = new Attenlist((Activity) myContext,Name);
 
-        ArrayAdapter adapterDB = new Bloglist_myblog((Activity) myContext, articleDB);
-        ArrayAdapter adapterGinger = new Bloglist_myblog((Activity) myContext, articleGinger);
-        ArrayAdapter adapterPeter = new Bloglist_myblog((Activity) myContext, articlePeter);
+        ArrayAdapter adapterName = new UnAttenlist((Activity) myContext,articletest);
+        //ArrayAdapter adapterName = new Attenlist((Activity) myContext,attenName);
 
-        //mybloglist.setAdapter(adapterDB);
-        listView.setAdapter(adapterGinger);
-        //listView.setAdapter(adapterPeter);
+
+        //ArrayAdapter adaptertest =  new Bloglist_myblog((Activity) myContext, articletest);
+        listView.setAdapter(adapterName);
     }
+
+
 
     public void getArticleCFS() {
         // Filter example also at: https://firebase.google.com/docs/firestore/query-data/queries
@@ -281,13 +300,15 @@ class tabc extends RelativeLayout {
                 });
     }
 
-    public void getArticleCFS2() {
+    public void getArticleName(){
         // Filter example also at: https://firebase.google.com/docs/firestore/query-data/queries
         // https://medium.com/google-developers/why-are-firebase-apis-asynchronous-callbacks-promises-tasks-e037a6654a93
-        Toast.makeText(myContext, "Reading database......", Toast.LENGTH_SHORT).show();
+        Toast.makeText(myContext, "Reading database ......", Toast.LENGTH_SHORT).show();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         articleDB = new ArrayList<>();
+        articletest = new ArrayList<>();
+
         db.collection("Article_CFS")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -299,21 +320,64 @@ class tabc extends RelativeLayout {
                                 JSONObject tmpJsonobj = new JSONObject(document.getData());
                                 // Convert to Movie class
                                 try {
+                                    Log.e("ppp","omgomg");
                                     Article article = new Article(
                                             tmpJsonobj.getString("name"),
                                             tmpJsonobj.getString("title"),
                                             tmpJsonobj.getString("article"),
-                                            "熱度"+tmpJsonobj.getString("like"));
+                                            "\n熱度  ("+tmpJsonobj.getString("like")+")");
                                     articleDB.add(article);
+                                    articletest.add(article);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (articleDB==null){
+                                    Log.e("xxx","omgomg");
+                                }else {
+                                    Log.e("kkk","omgomg");
+                                }
+                            }
+                            getArticleCFS2();
+                        } else {
+                            Log.w("itspeter", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+    }
+    public void getArticleCFS2() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        attentionDB =new ArrayList<>();
+        db.collection("Attention")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("ooo", "getArticleCFS1 running");
+                            for (DocumentSnapshot document : task.getResult()) {
+                                Log.d("ooo", document.getId() + " => " + document.getData());
+                                JSONObject tmpJsonobj = new JSONObject(document.getData());
+                                // Convert to Movie class
+                                try {
+                                    Attention attention = new Attention(
+                                            tmpJsonobj.getString("owner"),
+                                            //tmpJsonobj.getString("article"),
+                                            tmpJsonobj.getString("blogger name")
+                                    );
+                                    attentionDB.add(attention);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
+                            //Log.e("ooo", "start before databaseReady1");
                             databaseReady2();
+                            //Log.e("ooo", "after databaseReady1");
                         } else {
                             Log.w("itspeter", "Error getting documents.", task.getException());
                         }
                     }
                 });
     }
+
 }
