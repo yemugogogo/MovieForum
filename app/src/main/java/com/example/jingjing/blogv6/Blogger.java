@@ -7,15 +7,17 @@ public class Blogger {
     String atten;
     String fan;
     String money;
+    String pic;
 
     public Blogger(){
 
     }
 
-    public Blogger(String name, String account, String password) {
+    public Blogger(String name, String account, String password,String pic) {
         this.name = name;
         this.account = account;
         this.password = password;
+        this.pic = pic;
     }
 
     public String getName() {
@@ -40,6 +42,10 @@ public class Blogger {
 
     public String getMoney() {
         return money;
+    }
+
+    public String getPic() {
+        return pic;
     }
 }
 

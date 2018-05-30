@@ -97,7 +97,8 @@ public class LoginActivity extends Activity {
                                     Blogger blogger = new Blogger(
                                             tmpJsonobj.getString("name"),
                                             tmpJsonobj.getString("account"),
-                                            tmpJsonobj.getString("password"));
+                                            tmpJsonobj.getString("password"),
+                                            tmpJsonobj.getString("pic"));
                                     bloggerDB.add(blogger);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

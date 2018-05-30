@@ -16,11 +16,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Homefragment extends Fragment{
     @Nullable
     private android.support.design.widget.TabLayout homeTabs;
     private ViewPager homeViewPager;
+
+
 
 
     //private tabd mTabd;
@@ -34,10 +41,11 @@ public class Homefragment extends Fragment{
 //        this.mainContext = mainContext;
 //    }
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.e("jjjj", "onCreate called.");
         return inflater.inflate(R.layout.home,null);
-
     }
 
     @Override

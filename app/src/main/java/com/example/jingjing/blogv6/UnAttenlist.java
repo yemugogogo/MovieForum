@@ -31,12 +31,12 @@ public class UnAttenlist extends ArrayAdapter<Article> {
         LayoutInflater inflater=context.getLayoutInflater();
 
         View listviewItem=inflater.inflate(R.layout.listview_myatten,null,true);
-        TextView attenname=(TextView)listviewItem.findViewById(R.id.attenname);
+        //TextView attenname=(TextView)listviewItem.findViewById(R.id.attenname);
         Article Article = Articles.get(position);
         //Attention Attention = Attentions.get(position);
         //Article Article = Articles.get(position);
         //Log.e("ooo", " Found - |" + Attention.getBlgger_name() + "|");
-        attenname.setText(Article.getName());
+        //attenname.setText(Article.getName());
 
 
         return listviewItem;
