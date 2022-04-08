@@ -1,12 +1,12 @@
 package com.example.jingjing.blogv6;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 public class Newsfragment extends Fragment{
 
     @Nullable
-    private android.support.design.widget.TabLayout mTabs;
+    private TabLayout mTabs;
     private ViewPager mViewPager;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.news,null);
@@ -25,7 +25,7 @@ public class Newsfragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Log.e("jjjj", String.valueOf(getView()));
-        mTabs = (android.support.design.widget.TabLayout) getView().findViewById(R.id.toptab_news);
+        mTabs = (TabLayout) getView().findViewById(R.id.toptab_news);
         mViewPager = (ViewPager) getView().findViewById(R.id.viewpager_news);
 
         mViewPager.setAdapter(new SamplePagerAdapter());

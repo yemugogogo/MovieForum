@@ -9,7 +9,7 @@
 
 
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/toptab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         app:tabIndicatorColor="@android:color/holo_green_light"
         >
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/taba"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,27 +26,27 @@
 
             />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="發現" />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="收藏" />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="專欄" />
 
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

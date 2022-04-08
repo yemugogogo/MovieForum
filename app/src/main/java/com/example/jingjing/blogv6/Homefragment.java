@@ -1,30 +1,22 @@
 package com.example.jingjing.blogv6;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Homefragment extends Fragment{
     @Nullable
-    private android.support.design.widget.TabLayout homeTabs;
+    private TabLayout homeTabs;
     private ViewPager homeViewPager;
 
 
@@ -66,7 +58,7 @@ public class Homefragment extends Fragment{
 
         super.onViewCreated(view, savedInstanceState);
         //Log.e("jjjj", String.valueOf(getView()));
-        homeTabs = (android.support.design.widget.TabLayout) getView().findViewById(R.id.toptab_home);
+        homeTabs = (TabLayout) getView().findViewById(R.id.toptab_home);
         homeViewPager = (ViewPager) getView().findViewById(R.id.viewpager_home);
         homeViewPager.setAdapter(new SamplePagerAdapter());
         homeViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(homeTabs));
